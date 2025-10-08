@@ -1,6 +1,7 @@
 function App() {
   const [trackingNumber, setTrackingNumber] = React.useState("");
   const [selectedCarrier, setSelectedCarrier] = React.useState("");
+  const [showTooltip, setShowTooltip] = React.useState(false);
 
   const handleTrackingNumberChange = (event) => {
     setTrackingNumber(event.target.value);
@@ -30,7 +31,10 @@ function App() {
   const handleCopyButtonClick = () => {
     if (selectedCarrier && trackingNumber) {
       navigator.clipboard.writeText(getTrackingLink(selectedCarrier, trackingNumber));
-      alert("リンクをコピーしました！");
+      setShowTooltip(true);
+      setTimeout(() => {
+        setShowTooltip(false);
+      }, 1000);
     }
   };
 
@@ -63,7 +67,10 @@ function App() {
             <a href={getTrackingLink(selectedCarrier, trackingNumber)} target="_blank" rel="noopener noreferrer">
               リンクに遷移
             </a>
-            <button onClick={handleCopyButtonClick}>コピー</button>
+            <div className="copy-button-container">
+              <button onClick={handleCopyButtonClick}>コピー</button>
+              {showTooltip && <div className="tooltip">リンクをコピーしました！</div>}
+            </div>
           </p>
         )}
       </div>
