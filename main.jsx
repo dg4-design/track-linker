@@ -18,6 +18,10 @@ function App() {
         return `https://k2k.sagawa-exp.co.jp/p/web/okurijosearch.do?oku01=${number}`;
       case "日本郵便":
         return `https://trackings.post.japanpost.jp/services/sp/srv/search/direct?locale=ja&reqCodeNo=${number}`;
+      case "日本通運":
+        return `https://lp-trace.nittsu.co.jp/web/webarpaa702.srv?LANG=JP&officeselect2=&denpyoNo1=${number}`;
+      case "西濃運輸":
+        return `https://track.seino.co.jp/cgi-bin/gnpquery.pgm?GNPNO1=${number}`;
       default:
         return "";
     }
@@ -44,6 +48,14 @@ function App() {
       <div>
         <input type="radio" id="japanPost" name="carrier" value="日本郵便" onChange={handleCarrierChange} />
         <label htmlFor="japanPost">日本郵便</label>
+      </div>
+      <div>
+        <input type="radio" id="nittsu" name="carrier" value="日本通運" onChange={handleCarrierChange} />
+        <label htmlFor="nittsu">日本通運</label>
+      </div>
+      <div>
+        <input type="radio" id="seino" name="carrier" value="西濃運輸" onChange={handleCarrierChange} />
+        <label htmlFor="seino">西濃運輸</label>
       </div>
       <div className="result">
         {selectedCarrier && trackingNumber && (
